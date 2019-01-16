@@ -3,7 +3,7 @@ const main = async () => {
   document.body.textContent += `\nActivating shared worker that will try to fetch https://127.0.0.1:${port} (you can customize port as query param)`
   
   const worker = new SharedWorker(`./shared-worker/worker.js?port=${port}`)
-  worker.onmessage = (message) => {
+  worker.port.onmessage = (message) => {
     document.body.textContent += `\n${message.data}`
   }
 

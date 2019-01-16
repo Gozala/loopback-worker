@@ -6,6 +6,7 @@ const main = async () => {
   worker.port.onmessage = (message) => {
     document.body.textContent += `\n${message.data}`
   }
+  worker.port.start()
 
   document.body.textContent += "\nWaiting message from shared worker"
 }

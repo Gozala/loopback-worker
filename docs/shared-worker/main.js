@@ -9,7 +9,7 @@ const main = async () => {
 }
 
 const workerFetch = (worker, url) => {
-  worker.postMessage({ fetch: url })
+  worker.port.postMessage({ fetch: url })
 }
 
 main()

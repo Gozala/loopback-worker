@@ -16,4 +16,4 @@ const workerFetch = async (port, url) => {
   }
 }
 
-main([self])
+main({ports:[self]})

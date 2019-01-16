@@ -1,8 +1,11 @@
 const main = async ({ports}) => {
   const [port] = ports;
   port.start()
-  const url = new URL(location.href).searchParams.get("url") || "http://127.0.0.1:8080"
-  port.postMessage(`SharedWorker is fetching from ${url}`)
+  port.postMessage(`SharedWorker client is connected`)
+  port.onmessage = workerFetch
+}
+
+const workerFetch = ({ fetch: url }) => {
   try {
     const response = await fetch(url)
     port.postMessage(`SharedWorker got resoponse ${response.status}`)

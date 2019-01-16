@@ -5,7 +5,7 @@ const main = async () => {
   document.body.innerHTML += "\nWaiting message from shared worker"
   worker.port.onmessage = ({data}) => document.body.innerHTML += `\nSharedWorker: ${data}`
   const input = document.querySelector("input")
-  document.querySelector("button").onclick = () => workerFetch(worker)
+  document.querySelector("button").addEventListener("click", () => workerFetch(worker, input.value))
   workerFetch(worker, input.value)
 }
 

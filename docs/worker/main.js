@@ -1,13 +1,14 @@
 const main = async () => {
-  const url = new URL(location.href).searchParams.get("url") || "http://127.0.0.1:8080"
-  document.body.textContent += `\nActivating dedicated worker that will try to fetch ${url} (you can customize url query param)`
-  
-  const worker = new Worker(`./worker/worker.js?url=${url}`)
-  worker.onmessage = (message) => {
-    document.body.textContent += `\n${message.data}`
-  }
+  document.body.innerHTML += `\nActivating shared worker`
+  const worker = new Worker(`./shared-worker/worker.js?_=${Math.random().toString(36).slice(2)}`)
+  document.body.innerHTML += "\nWaiting message from shared worker"
+  worker.onmessage = ({data}) => document.body.innerHTML += `\nSharedWorker: ${data}`
+  document.onclick = (event) => { if (event.target.id === "go") { workerFetch(worker) } }
+  workerFetch(worker)
+}
 
-  document.body.textContent += "\nWaiting message from worker"
+const workerFetch = (worker) => {
+  worker.postMessage({ fetch: document.querySelector("input").value })
 }
 
 main()

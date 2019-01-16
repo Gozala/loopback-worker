@@ -4,7 +4,7 @@ const main = async () => {
   worker.port.start()
   document.body.innerHTML += "\nWaiting message from shared worker"
   worker.port.onmessage = ({data}) => document.body.innerHTML += `\nSharedWorker: ${data}`
-  document.onclick =() => workerFetch(worker)
+  document.onclick = (event) => { if (event.target.id === "go") { (workerFetch(worker) } }
   workerFetch(worker)
 }
 

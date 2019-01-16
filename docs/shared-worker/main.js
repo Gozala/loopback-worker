@@ -3,9 +3,9 @@ const main = async () => {
   const worker = new SharedWorker(`./shared-worker/worker.js?_=${Math.random().toString(36).slice(2)}`)
   worker.port.start()
   document.body.innerHTML += "\nWaiting message from shared worker"
-  document.querySelector("button").onclick = () => workerFetch(worker)
   worker.port.onmessage = ({data}) => document.body.innerHTML += `\nSharedWorker: ${data}`
   const input = document.querySelector("input")
+  document.querySelector("button").onclick = () => workerFetch(worker)
   workerFetch(worker, input.value)
 }
 

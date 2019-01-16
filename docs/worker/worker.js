@@ -1,6 +1,5 @@
 const main = async () => {
-  const port = new URL(location.href).searchParams.get("port") || "8080"
-  const url = `http://127.0.0.1:${port}/`
+  const url = new URL(location.href).searchParams.get("url") || "http://127.0.0.1:8080"
   self.postMessage(`Worker is fetching from ${url}`)
   try {
     const response = await fetch(url)

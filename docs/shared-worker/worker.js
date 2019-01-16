@@ -1,5 +1,5 @@
 const main = async (channel) => {
-  const port = new URL(location.href).searchParams.port || 8080
+  const port = new URL(location.href).searchParams.get("port") || "8080"
   const url = `http://127.0.0.1:${port}/`
   self.postMessage(`SharedWorker is fetching from ${url}`)
   try {

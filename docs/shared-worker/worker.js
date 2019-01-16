@@ -7,6 +7,7 @@ const main = async ({ports}) => {
 
 const workerFetch = async (port, url) => {
   try {
+    port.postMessage(`SharedWorker is fetching ${url}`)
     const response = await fetch(url)
     port.postMessage(`SharedWorker got resoponse ${response.status}`)
     const text = await response.text()

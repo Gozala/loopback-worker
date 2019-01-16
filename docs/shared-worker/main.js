@@ -1,6 +1,6 @@
 const main = async () => {
-  document.body.textContent += `\nActivating shared worker that will try to fetch ${url} (you can customize url as query param)`
-  const worker = new SharedWorker(`./shared-worker/worker.js?url=${url}`)
+  document.body.textContent += `\nActivating shared worker`
+  const worker = new SharedWorker(`./shared-worker/worker.js`)
   worker.port.start()
   document.body.textContent += "\nWaiting message from shared worker"
   document.querySelector("button").onclick = () => workerFetch(worker)

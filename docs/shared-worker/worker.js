@@ -2,10 +2,10 @@ const main = async ({ports}) => {
   const [port] = ports;
   port.start()
   port.postMessage(`SharedWorker client is connected`)
-  port.onmessage = workerFetch
+  port.onmessage = (messsage) => workerFetch(port, message.data.fetch)
 }
 
-const workerFetch = ({ fetch: url }) => {
+const workerFetch = (port, url) => {
   try {
     const response = await fetch(url)
     port.postMessage(`SharedWorker got resoponse ${response.status}`)
